@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Páginas autenticadas (cookies do Supabase) renderizam por requisição.
+  cacheComponents: false,
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "*.supabase.co" }],
+  },
   turbopack: {
     rules: {
       "*.css": {

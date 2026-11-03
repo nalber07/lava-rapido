@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lava Rápido
 
-## Getting Started
+App de gestão por assinatura para lava rápidos, feito para o celular (PWA instalável).
 
-First, run the development server:
+- **Dono:** agenda do dia, clientes e veículos, serviços e produtos, pedidos da loja, financeiro, cartão fidelidade, planos mensais, equipe e assinatura.
+- **Cliente final** (`/l/<nome-do-lava>`): agenda a lavagem escolhendo serviço, veículo, dia e horário livre; paga por Pix/cartão (Mercado Pago) ou no local; compra produtos; acompanha o status do carro e vê fotos de antes e depois.
+- **Admin da plataforma** (`/admin`): lista de lava rápidos, assinantes e receita mensal.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js 16 (App Router, Server Actions) · Tailwind CSS 4 · Supabase (Auth, Postgres com RLS, Storage) · Mercado Pago · Vercel.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Como rodar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Crie um projeto no [Supabase](https://supabase.com/dashboard) e rode o SQL de `supabase/migrations/0001_schema.sql` (SQL Editor) ou `npx supabase db push`.
+2. Copie `.env.example` para `.env.local` e preencha as chaves (Project Settings > API).
+3. `npm install` e `npm run dev`.
 
-## Learn More
+Para desenvolver com o Supabase local: `npx supabase start` (precisa de Docker).
 
-To learn more about Next.js, take a look at the following resources:
+### Variáveis de ambiente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Nome | Para quê |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Conexão com o Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | Webhook de pagamento e leitura do token do Mercado Pago de cada lava rápido (só no servidor) |
+| `NEXT_PUBLIC_SITE_URL` | URL pública, usada nos links de confirmação e retorno de pagamento |
+| `MP_ACCESS_TOKEN` | Mercado Pago da plataforma, cobra a assinatura mensal dos donos |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Pagamentos
 
-## Deploy on Vercel
+- Cada dono cola o próprio Access Token do Mercado Pago em **Configurações**; os pagamentos dos clientes caem direto na conta dele.
+- Configure o webhook do Mercado Pago da plataforma para `https://SEU-SITE/api/mercadopago/webhook` (eventos de assinaturas). Pagamentos dos clientes já enviam a URL de notificação automaticamente.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Tornar-se admin
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+No SQL Editor: `update perfis set is_admin = true where id = (select id from auth.users where email = 'seu@email.com');`
+
+## Segurança
+
+Todas as tabelas têm RLS: cada lava rápido só vê os próprios dados, funcionários não veem o financeiro, clientes só veem os próprios agendamentos e pedidos. Agendamentos, pedidos e planos são criados por funções no banco que validam horário livre, estoque, selos e plano.

@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-geist-sans), ui-sans-serif, sans-serif;
+
+  --color-tinta: #0d1b2a;
+  --color-tinta-2: #3d4b5c;
+  --color-tinta-3: #5a6778;
+  --color-fundo: #f3f6f9;
+  --color-superficie: #ffffff;
+  --color-borda: #dfe5ec;
+  --color-borda-forte: #c5cfda;
+
+  --color-agua-50: #eaf4fe;
+  --color-agua-100: #d3e8fd;
+  --color-agua-200: #a7d0fa;
+  --color-agua-500: #1677e5;
+  --color-agua-600: #0b62c4;
+  --color-agua-700: #094e9c;
+  --color-agua-900: #0a2a52;
+
+  --color-espuma: #12b886;
+  --color-espuma-50: #e6f8f1;
+  --color-ambar: #d98a00;
+  --color-ambar-50: #fdf3e1;
+  --color-perigo: #d93f3f;
+  --color-perigo-50: #fdecec;
+
+  --radius-cartao: 1rem;
+  --shadow-cartao: 0 1px 2px rgb(13 27 42 / 0.04), 0 1px 3px rgb(13 27 42 / 0.06);
+  --shadow-flutuante: 0 8px 24px rgb(13 27 42 / 0.12);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-fundo);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 0;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Área segura do iPhone para barras fixas */
+.pb-seguro {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-agua-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Itens de grid não estouram a largura por causa de textos longos (truncate). */
+@layer base {
+  .grid > * {
+    min-width: 0;
+  }
 }
