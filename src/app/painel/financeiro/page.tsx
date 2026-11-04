@@ -68,15 +68,15 @@ export default async function Financeiro({ searchParams }: PageProps<"/painel/fi
       <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3">
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Entradas</p>
-          <p className="mt-1 font-display text-2xl font-semibold tabular text-espuma-700">{moeda(entradas)}</p>
+          <p className="mt-1 font-display text-xl tabular text-espuma-700">{moeda(entradas)}</p>
         </Cartao>
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Saídas</p>
-          <p className="mt-1 font-display text-2xl font-semibold tabular text-perigo">{moeda(saidas)}</p>
+          <p className="mt-1 font-display text-xl tabular text-perigo">{moeda(saidas)}</p>
         </Cartao>
         <Cartao className="col-span-2 p-4 md:col-span-1">
           <p className="text-sm text-tinta-3">Resultado</p>
-          <p className={cx("mt-1 font-display text-2xl font-semibold tabular", entradas - saidas < 0 && "text-perigo")}>
+          <p className={cx("mt-1 font-display text-xl tabular", entradas - saidas < 0 && "text-perigo")}>
             {moeda(entradas - saidas)}
           </p>
         </Cartao>

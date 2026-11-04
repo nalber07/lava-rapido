@@ -35,7 +35,7 @@ export default async function Cliente({ params }: PageProps<"/painel/clientes/[i
 
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight">{c.nome}</h1>
+          <h1 className="font-display text-xl tracking-tight">{c.nome}</h1>
           <p className="text-sm text-tinta-3">
             {historico?.length ?? 0} visita(s) · {moeda(gasto)} gastos
             {empresa.fidelidade_ativa && ` · ${c.selos}/${empresa.fidelidade_meta} selos`}

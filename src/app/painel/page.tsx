@@ -116,7 +116,7 @@ function Indicador({ rotulo, valor, detalhe }: { rotulo: string; valor: string; 
   return (
     <Cartao className="p-4">
       <p className="text-sm text-tinta-3">{rotulo}</p>
-      <p className="mt-1 font-display text-2xl font-semibold tabular tracking-tight">{valor}</p>
+      <p className="mt-1 font-display text-xl tabular tracking-tight">{valor}</p>
       {detalhe && <p className="mt-0.5 text-xs text-tinta-3">{detalhe}</p>}
     </Cartao>
   );

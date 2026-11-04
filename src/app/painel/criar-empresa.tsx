@@ -8,7 +8,7 @@ export function CriarEmpresa({ nome, slug, telefone }: { nome: string; slug: str
   return (
     <main className="mx-auto max-w-md px-5 py-8">
       <Marca />
-      <h1 className="mt-10 font-display text-3xl font-semibold tracking-tight">Cadastre seu lava rápido</h1>
+      <h1 className="mt-10 text-3xl font-light tracking-[-0.03em]">Cadastre seu lava rápido</h1>
       <p className="mt-1 text-tinta-3">Último passo para abrir seu painel.</p>
       <Cartao className="mt-6 p-5">
         <Formulario acao={criarEmpresa} className="space-y-4">

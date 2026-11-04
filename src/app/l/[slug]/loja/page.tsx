@@ -17,7 +17,7 @@ export default async function Loja({ params }: PageProps<"/l/[slug]/loja">) {
 
   return (
     <>
-      <h1 className="mb-1 font-display text-2xl font-semibold tracking-tight">Loja</h1>
+      <h1 className="mb-1 font-display text-xl tracking-tight">Loja</h1>
       <p className="mb-5 text-sm text-tinta-3">Compre agora e retire no {e.nome}.</p>
       {produtos.length === 0 ? (
         <Vazio titulo="Nenhum produto à venda no momento" />

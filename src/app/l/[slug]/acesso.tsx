@@ -8,7 +8,7 @@ export function PedirLogin({ slug, destino, texto }: { slug: string; destino: st
   const next = encodeURIComponent(destino);
   return (
     <Cartao className="p-6 text-center">
-      <p className="font-display text-xl font-semibold">Entre para continuar</p>
+      <p className="font-display text-lg">Entre para continuar</p>
       <p className="mx-auto mt-1 max-w-sm text-sm text-tinta-3">{texto}</p>
       <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-center">
         <BotaoLink href={`/entrar?modo=criar&next=${next}`}>Criar conta</BotaoLink>
@@ -34,7 +34,7 @@ export function CompletarCadastro({
 }) {
   return (
     <Cartao className="p-5">
-      <p className="font-display text-xl font-semibold">Confirme seus dados</p>
+      <p className="font-display text-lg">Confirme seus dados</p>
       <p className="mt-1 text-sm text-tinta-3">Assim o lava rápido sabe quem está chegando.</p>
       <Formulario acao={completarCadastro.bind(null, empresaId, slug)} className="mt-4 space-y-3">
         <Campo rotulo="Nome">

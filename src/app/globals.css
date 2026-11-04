@@ -1,104 +1,397 @@
 @import "tailwindcss";
 
-@theme {
-  /* Barlow nasceu da sinalização de estrada; a versão condensada vira os títulos e as placas. */
-  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow-cond), var(--font-barlow), ui-sans-serif, sans-serif;
+/*
+ * Paleta Pista
+ *   #FFFFFF branco · #E5E5E5 platina · #FCA311 ouro · #14213D marinho · #000000 preto
+ * Cada token muda entre claro e escuro; as classes do Tailwind leem as variáveis.
+ */
 
-  /* Tinta: o azul-marinho da faixa da placa Mercosul, escurecido para texto. */
-  --color-tinta: #101c3d;
-  --color-tinta-2: #38446a;
-  --color-tinta-3: #5a6587;
-  /* Fundo: concreto molhado, frio e claro. */
-  --color-fundo: #eff3f8;
-  --color-superficie: #ffffff;
-  --color-borda: #dce3ee;
-  --color-borda-forte: #bfcadb;
+:root {
+  color-scheme: light;
 
-  /* Azul placa: cor de ação do app. */
-  --color-agua-50: #edf2fe;
-  --color-agua-100: #d9e3fc;
-  --color-agua-200: #b1c5f7;
-  --color-agua-500: #2f5fe6;
-  --color-agua-600: #1d48c9;
-  --color-agua-700: #183aa1;
-  --color-agua-900: #0f1f52;
+  --fundo: #e5e5e5;
+  --superficie: #ffffff;
+  --superficie-2: #f3f3f3;
+  --borda: #d6d6d6;
+  --borda-forte: #b9b9b9;
 
-  /* Amarelo sinal: a placa pintada à mão de "LAVA JATO". Só para o que precisa ser visto de longe. */
-  --color-sinal: #ffcb2e;
-  --color-sinal-claro: #ffe27a;
-  --color-sinal-50: #fff7d9;
-  --color-sinal-700: #7a5900;
+  --tinta: #14213d;
+  --tinta-2: #37425e;
+  --tinta-3: #535c74;
 
-  --color-espuma: #12a172;
-  --color-espuma-50: #e3f6ee;
-  --color-espuma-700: #0b6e4f;
-  --color-ambar: #d98a00;
-  --color-ambar-50: #fdf3e1;
-  --color-ambar-700: #855400;
-  --color-perigo: #d13b3b;
-  --color-perigo-50: #fdecec;
+  /* Ouro: preenchimento de ação; o texto por cima é sempre preto. */
+  --acao: #fca311;
+  --acao-forte: #e8930a;
+  --sobre-acao: #000000;
 
-  --radius-cartao: 1rem;
-  --shadow-cartao: 0 1px 2px rgb(16 28 61 / 0.05), 0 1px 3px rgb(16 28 61 / 0.07);
-  --shadow-flutuante: 0 12px 32px -8px rgb(16 28 61 / 0.25);
+  /* Escala de acento para texto, ícones e fundos tingidos. */
+  --agua-50: #fff3dc;
+  --agua-100: #fde3b0;
+  --agua-200: #f9cb7a;
+  --agua-500: #fca311;
+  --agua-600: #a86400;
+  --agua-700: #7f4b00;
+  /* Painel marinho: igual nos dois temas. */
+  --agua-900: #14213d;
 
-  --animate-pista: pista 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --espuma: #12a172;
+  --espuma-50: #e2f5ec;
+  --espuma-700: #0b6a4c;
+  --ambar: #d98a00;
+  --ambar-50: #fdf1dc;
+  --ambar-700: #7f5000;
+  --perigo: #cf3434;
+  --perigo-50: #fbe9e9;
 
-  @keyframes pista {
-    from {
-      opacity: 0;
-      transform: translateX(-48px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
+  --sombra-cartao: 0 1px 2px rgb(20 33 61 / 0.06), 0 2px 8px -2px rgb(20 33 61 / 0.08);
+  --sombra-flutuante: 0 24px 48px -16px rgb(20 33 61 / 0.35);
+  --brilho-borda: rgb(255 255 255 / 0.9);
+}
+
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+
+  --fundo: #000000;
+  --superficie: #0d1322;
+  --superficie-2: #141c30;
+  --borda: #222c44;
+  --borda-forte: #36415e;
+
+  --tinta: #ffffff;
+  --tinta-2: #e5e5e5;
+  --tinta-3: #a2a9ba;
+
+  --acao: #fca311;
+  --acao-forte: #ffb83f;
+  --sobre-acao: #000000;
+
+  --agua-50: #2a1e07;
+  --agua-100: #3d2b09;
+  --agua-200: #f9cb7a;
+  --agua-500: #fca311;
+  --agua-600: #fca311;
+  --agua-700: #ffc25c;
+  --agua-900: #14213d;
+
+  --espuma: #22b884;
+  --espuma-50: #0c2a20;
+  --espuma-700: #6fdcb0;
+  --ambar: #f0a020;
+  --ambar-50: #2d2006;
+  --ambar-700: #ffc766;
+  --perigo: #ef5b5b;
+  --perigo-50: #331314;
+
+  --sombra-cartao: 0 0 0 1px rgb(255 255 255 / 0.02);
+  --sombra-flutuante: 0 30px 60px -20px rgb(0 0 0 / 0.9);
+  --brilho-borda: rgb(255 255 255 / 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    color-scheme: dark;
+
+    --fundo: #000000;
+    --superficie: #0d1322;
+    --superficie-2: #141c30;
+    --borda: #222c44;
+    --borda-forte: #36415e;
+
+    --tinta: #ffffff;
+    --tinta-2: #e5e5e5;
+    --tinta-3: #a2a9ba;
+
+    --acao: #fca311;
+    --acao-forte: #ffb83f;
+    --sobre-acao: #000000;
+
+    --agua-50: #2a1e07;
+    --agua-100: #3d2b09;
+    --agua-200: #f9cb7a;
+    --agua-500: #fca311;
+    --agua-600: #fca311;
+    --agua-700: #ffc25c;
+    --agua-900: #14213d;
+
+    --espuma: #22b884;
+    --espuma-50: #0c2a20;
+    --espuma-700: #6fdcb0;
+    --ambar: #f0a020;
+    --ambar-50: #2d2006;
+    --ambar-700: #ffc766;
+    --perigo: #ef5b5b;
+    --perigo-50: #331314;
+
+    --sombra-cartao: 0 0 0 1px rgb(255 255 255 / 0.02);
+    --sombra-flutuante: 0 30px 60px -20px rgb(0 0 0 / 0.9);
+    --brilho-borda: rgb(255 255 255 / 0.08);
   }
 }
 
-/* Placa no padrão Mercosul: faixa azul em cima, caracteres condensados. */
+@theme inline {
+  /* Michroma: larga e geométrica, para marca e títulos. Manrope: leitura. */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-michroma), var(--font-manrope), ui-sans-serif, sans-serif;
+
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-borda: var(--borda);
+  --color-borda-forte: var(--borda-forte);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-tinta-3: var(--tinta-3);
+
+  --color-acao: var(--acao);
+  --color-acao-forte: var(--acao-forte);
+  --color-sobre-acao: var(--sobre-acao);
+
+  --color-agua-50: var(--agua-50);
+  --color-agua-100: var(--agua-100);
+  --color-agua-200: var(--agua-200);
+  --color-agua-500: var(--agua-500);
+  --color-agua-600: var(--agua-600);
+  --color-agua-700: var(--agua-700);
+  --color-agua-900: var(--agua-900);
+
+  --color-espuma: var(--espuma);
+  --color-espuma-50: var(--espuma-50);
+  --color-espuma-700: var(--espuma-700);
+  --color-ambar: var(--ambar);
+  --color-ambar-50: var(--ambar-50);
+  --color-ambar-700: var(--ambar-700);
+  --color-perigo: var(--perigo);
+  --color-perigo-50: var(--perigo-50);
+
+  --color-ouro: #fca311;
+  --color-marinho: #14213d;
+  --color-platina: #e5e5e5;
+
+  --radius-cartao: 1.125rem;
+  --shadow-cartao: var(--sombra-cartao);
+  --shadow-flutuante: var(--sombra-flutuante);
+
+  --animate-entra: entra 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-faixa: faixa 40s linear infinite;
+  --animate-pulso: pulso 2.4s ease-out infinite;
+  --animate-flutua: flutua 6s ease-in-out infinite;
+  --animate-gira: gira 18s linear infinite;
+  --animate-pagina: pagina 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes entra {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+@keyframes pagina {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes faixa {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulso {
+  0% {
+    box-shadow: 0 0 0 0 rgb(252 163 17 / 0.55);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 14px rgb(252 163 17 / 0);
+  }
+}
+@keyframes flutua {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes gira {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes revela {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes desenha {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes passa {
+  0% {
+    transform: translateX(-110%);
+  }
+  12%,
+  88% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(110%);
+  }
+}
+@keyframes enche {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes carimba {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+}
+@keyframes brilha {
+  from {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(320%) skewX(-20deg);
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: var(--font-sans);
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cantos chanfrados (referência automotiva). Navegadores sem corner-shape ficam com canto arredondado. */
+.chanfro {
+  corner-shape: bevel;
+}
+
+/* Borda com reflexo metálico no topo, como o vidro de um painel. */
+.metal {
+  position: relative;
+  isolation: isolate;
+}
+.metal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  corner-shape: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, var(--brilho-borda), transparent 40%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Régua: divisor com marcações, como o painel de instrumentos. */
+.regua {
+  height: 14px;
+  background:
+    repeating-linear-gradient(90deg, var(--borda-forte) 0 1px, transparent 1px 12px) bottom / 100% 6px no-repeat,
+    repeating-linear-gradient(90deg, var(--tinta-3) 0 1px, transparent 1px 120px) bottom / 100% 14px no-repeat;
+  opacity: 0.7;
+}
+
+/* Holofote que segue o cursor (posição vem de --mx/--my via JS). */
+.holofote {
+  position: relative;
+}
+.holofote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  corner-shape: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, -20%), rgb(252 163 17 / 0.13), transparent 60%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.holofote:hover::before {
+  opacity: 1;
+}
+
+/* Reflexo que atravessa o botão principal. */
+.reflexo {
+  position: relative;
+  overflow: hidden;
+}
+.reflexo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+}
+.reflexo:hover::after {
+  animation: brilha 800ms ease;
+}
+
+/* Blocos que aparecem ao rolar (CSS puro; sem suporte, ficam visíveis). */
+@supports (animation-timeline: view()) {
+  .revela {
+    animation: revela linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 28%;
+  }
+}
+
+/* Placa no padrão Mercosul: objeto real, igual nos dois temas. */
 .placa {
   display: inline-flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1.5px solid var(--color-tinta);
-  border-radius: 0.375rem;
+  border: 1.5px solid #14213d;
+  border-radius: 0.3rem;
   background: #fff;
-  color: var(--color-tinta);
+  color: #14213d;
   font-family: var(--font-display);
-  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
 }
 .placa::before {
   content: "";
   display: block;
-  height: 0.3em;
-  background: var(--color-agua-600);
+  height: 0.32em;
+  background: #1d3f9b;
 }
 .placa > span {
-  padding: 0.2em 0.45em 0.18em;
-}
-
-:root {
-  color-scheme: light;
-}
-
-html {
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  background: var(--color-fundo);
-  color: var(--color-tinta);
-  font-family: var(--font-sans);
-  font-feature-settings: "tnum" 0;
-}
-
-.tabular {
-  font-variant-numeric: tabular-nums;
+  padding: 0.28em 0.5em 0.24em;
 }
 
 /* Área segura do iPhone para barras fixas */
@@ -110,23 +403,34 @@ input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
   opacity: 0.6;
 }
-
-:focus-visible {
-  outline: 2px solid var(--color-agua-500);
-  outline-offset: 2px;
+:root[data-tema="escuro"] input[type="date"]::-webkit-calendar-picker-indicator,
+:root[data-tema="escuro"] input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
-/* Em superfícies azul-marinho o foco azul some: usa o amarelo sinal. */
-.escuro :focus-visible {
-  outline-color: var(--color-sinal);
+:focus-visible {
+  outline: 2px solid var(--acao);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #fca311;
+  color: #000;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .revela {
+    animation: none !important;
   }
 }
 
@@ -135,4 +439,314 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .grid > * {
     min-width: 0;
   }
+}
+
+/* Faixas do símbolo correm para o horizonte quando passa o mouse no logo. */
+@keyframes corre {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  46% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.group:hover .simbolo-faixas {
+  animation: corre 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===================== Landing ===================== */
+
+/* Estrada em perspectiva do hero: faixas douradas vindo na direção de quem olha. */
+.estrada {
+  position: absolute;
+  left: 50%;
+  bottom: 9rem;
+  width: 200%;
+  height: 900px;
+  transform: translateX(-50%) perspective(520px) rotateX(70deg);
+  transform-origin: bottom center;
+  background:
+    linear-gradient(180deg, #fca311 50%, transparent 50%) 50% 0 / 16px 140px repeat-y,
+    linear-gradient(180deg, var(--borda-forte) 1px, transparent 1px) 0 0 / 100% 140px repeat,
+    repeating-linear-gradient(90deg, var(--borda-forte) 0 1px, transparent 1px 120px);
+  -webkit-mask-image: linear-gradient(to top, #000 20%, transparent 95%), linear-gradient(90deg, transparent 25%, #000 45%, #000 55%, transparent 75%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to top, #000 20%, transparent 95%), linear-gradient(90deg, transparent 25%, #000 45%, #000 55%, transparent 75%);
+  mask-composite: intersect;
+  animation: estrada 0.9s linear infinite;
+  opacity: 0.85;
+}
+@keyframes estrada {
+  to {
+    background-position:
+      50% 140px,
+      0 140px,
+      0 0;
+  }
+}
+
+/* Horizonte: arco luminoso, como o planeta da referência. */
+.horizonte {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, 86%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, transparent 96%, var(--fundo) 99%, transparent 100%);
+  box-shadow:
+    0 -1px 0 rgb(252 163 17 / 0.7),
+    0 -30px 120px -20px rgb(252 163 17 / 0.35);
+}
+
+/* Painel do produto: começa inclinado e endireita conforme a rolagem. */
+@supports (animation-timeline: view()) {
+  .inclina {
+    animation: inclina linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 45%;
+  }
+  .preenche {
+    animation: enche linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 55%;
+    transform-origin: left;
+  }
+}
+@keyframes inclina {
+  from {
+    transform: perspective(1400px) rotateX(24deg) scale(0.92);
+    opacity: 0.4;
+  }
+  to {
+    transform: perspective(1400px) rotateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Faixa infinita de integrações com bordas esmaecidas. */
+.faixa-mascara {
+  -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.faixa-mascara:hover .animate-faixa {
+  animation-play-state: paused;
+}
+
+/* Horários sendo reservados um a um. */
+@keyframes reserva {
+  0%,
+  20% {
+    background: var(--superficie-2);
+    color: var(--tinta-3);
+    border-color: var(--borda);
+  }
+  28%,
+  85% {
+    background: #fca311;
+    color: #000;
+    border-color: #fca311;
+  }
+  100% {
+    background: var(--superficie-2);
+    color: var(--tinta-3);
+    border-color: var(--borda);
+  }
+}
+.reserva {
+  animation: reserva 6s ease-in-out infinite;
+}
+
+/* Bolinhas de "digitando" no WhatsApp. */
+@keyframes digita {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Mensagem chega depois de "digitar". */
+@keyframes chega {
+  0%,
+  30% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  38%,
+  90% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes some {
+  0%,
+  28% {
+    opacity: 1;
+  }
+  32%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Antes e depois: a lavagem passa por cima da foto. */
+@keyframes varre {
+  0%,
+  10% {
+    clip-path: inset(0 100% 0 0);
+  }
+  50%,
+  60% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes varre-linha {
+  0%,
+  10% {
+    left: 0%;
+  }
+  50%,
+  60% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+/* Selos do cartão fidelidade sendo carimbados. */
+@keyframes selo {
+  0%,
+  8% {
+    background: transparent;
+    transform: scale(1);
+  }
+  12% {
+    background: #fca311;
+    transform: scale(1.3);
+  }
+  16%,
+  92% {
+    background: #fca311;
+    transform: scale(1);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+/* Linha do gráfico se desenhando. */
+.desenha {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: desenha 2.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@supports (animation-timeline: view()) {
+  .desenha {
+    animation: desenha linear forwards;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+  }
+}
+
+/* Borda dourada girando no plano em destaque. */
+@property --angulo {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes angulo {
+  to {
+    --angulo: 360deg;
+  }
+}
+.borda-viva {
+  position: relative;
+  isolation: isolate;
+}
+.borda-viva::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  z-index: -1;
+  border-radius: inherit;
+  corner-shape: inherit;
+  background: conic-gradient(from var(--angulo), transparent 0deg, #fca311 70deg, transparent 140deg, transparent 220deg, #fca311 290deg, transparent 360deg);
+  animation: angulo 5s linear infinite;
+}
+
+/* Sanfona das dúvidas com abertura animada. */
+.duvida {
+  interpolate-size: allow-keywords;
+}
+.duvida::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height 400ms cubic-bezier(0.16, 1, 0.3, 1), content-visibility 400ms allow-discrete;
+}
+.duvida[open]::details-content {
+  height: auto;
+}
+.duvida summary::-webkit-details-marker {
+  display: none;
+}
+.duvida[open] .duvida-icone {
+  transform: rotate(45deg);
+  background: #fca311;
+  color: #000;
+  border-color: #fca311;
+}
+
+/* Carros passando pela pista da seção do painel. */
+@keyframes avanca {
+  0% {
+    transform: translateX(-40%);
+    opacity: 0;
+  }
+  8%,
+  30% {
+    transform: translateX(var(--p1));
+    opacity: 1;
+  }
+  40%,
+  60% {
+    transform: translateX(var(--p2));
+  }
+  70%,
+  92% {
+    transform: translateX(var(--p3));
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--p3));
+    opacity: 0;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
 }

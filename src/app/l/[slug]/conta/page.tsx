@@ -27,7 +27,7 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
   if (!user) {
     return (
       <>
-        <h1 className="mb-5 font-display text-2xl font-semibold tracking-tight">Minha conta</h1>
+        <h1 className="mb-5 font-display text-xl tracking-tight">Minha conta</h1>
         <PedirLogin slug={slug} destino={destino} texto="Veja seus agendamentos, selos de fidelidade e compras." />
       </>
     );
@@ -36,7 +36,7 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
     const meta = user.user_metadata as Record<string, string>;
     return (
       <>
-        <h1 className="mb-5 font-display text-2xl font-semibold tracking-tight">Minha conta</h1>
+        <h1 className="mb-5 font-display text-xl tracking-tight">Minha conta</h1>
         <CompletarCadastro empresaId={e.id} slug={slug} nome={meta?.nome} telefone={meta?.telefone} />
       </>
     );
@@ -82,7 +82,7 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
       {temAtivos && <AtualizarSozinho segundos={20} />}
       <div className="mb-5 flex items-end justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight">Olá, {cliente.nome.split(" ")[0]}</h1>
+          <h1 className="font-display text-xl tracking-tight">Olá, {cliente.nome.split(" ")[0]}</h1>
           <p className="text-sm text-tinta-3">{user.email}</p>
         </div>
         <form action="/sair" method="post">
@@ -103,7 +103,7 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
       {planoEscolhido && (
         <Cartao className="mb-6 border-agua-600 p-4 ring-1 ring-agua-600">
           <p className="text-sm text-tinta-3">Assinar plano</p>
-          <p className="font-display text-xl font-semibold">{planoEscolhido.nome}</p>
+          <p className="font-display text-lg">{planoEscolhido.nome}</p>
           <p className="text-sm text-tinta-2">
             {planoEscolhido.lavagens_mes}× {(planoEscolhido.servicos as { nome: string } | null)?.nome} por mês ·{" "}
             <strong className="tabular">{moeda(planoEscolhido.preco_centavos)}/mês</strong>
@@ -152,7 +152,7 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
                   <ol className="mt-4 grid grid-cols-4 gap-1" aria-label="Andamento">
                     {PASSOS.map((p, i) => (
                       <li key={p} className="text-center">
-                        <div className={cx("h-1.5 rounded-full", i <= passo ? "bg-agua-600" : "bg-borda")} />
+                        <div className={cx("h-1.5 rounded-full", i <= passo ? "bg-acao" : "bg-borda")} />
                         <span className={cx("mt-1 block text-[11px]", i === passo ? "font-semibold text-agua-700" : "text-tinta-3")}>
                           {STATUS_AGENDAMENTO[p].rotulo}
                         </span>
@@ -193,7 +193,7 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
         <Secao titulo="Cartão fidelidade">
           <div className="rounded-cartao bg-agua-900 p-4 text-white">
             <div className="flex items-baseline justify-between">
-              <p className="font-display text-2xl font-semibold tabular">
+              <p className="font-display text-xl tabular">
                 {Math.min(cliente.selos, e.fidelidade_meta)}/{e.fidelidade_meta}
               </p>
               <p className="text-sm text-agua-200">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { assinaturaLiberada, diasDeTeste, getContextoPainel, getUsuario } from "@/lib/auth";
 import { BarraInferior, NavLateral } from "@/components/painel-nav";
 import { Marca } from "@/components/marca";
+import { AlternarTema } from "@/components/tema";
 import { CriarEmpresa } from "./criar-empresa";
 
 export default async function PainelLayout({ children }: LayoutProps<"/painel">) {
@@ -19,19 +20,23 @@ export default async function PainelLayout({ children }: LayoutProps<"/painel">)
 
   return (
     <div className="md:grid md:min-h-dvh md:grid-cols-[248px_1fr]">
-      <aside className="escuro sticky top-0 hidden h-dvh flex-col bg-agua-900 px-3 py-5 md:flex">
-        <div className="px-3 pb-6">
-          <Marca href="/painel" nome={empresa.nome} claro />
+      <aside className="sticky top-0 hidden h-dvh flex-col border-r border-borda bg-superficie px-3 py-6 md:flex">
+        <div className="px-3 pb-7">
+          <Marca href="/painel" nome={empresa.nome} />
         </div>
         <NavLateral dono={papel === "dono"} slug={empresa.slug} />
-        <form action="/sair" method="post" className="mt-auto px-3">
-          <button className="text-sm text-agua-200 hover:text-white">Sair</button>
-        </form>
+        <div className="mt-auto flex items-center justify-between gap-2 px-3">
+          <form action="/sair" method="post">
+            <button className="rounded-full px-1 py-2 text-sm text-tinta-3 transition-colors hover:text-tinta">Sair</button>
+          </form>
+          <AlternarTema />
+        </div>
       </aside>
 
       <div className="min-w-0">
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-borda bg-superficie/95 px-4 py-3 backdrop-blur md:hidden">
+        <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-borda bg-fundo/80 px-4 py-2.5 backdrop-blur-xl md:hidden">
           <Marca href="/painel" nome={empresa.nome} />
+          <AlternarTema />
         </header>
 
         {!liberada ? (
@@ -54,7 +59,7 @@ export default async function PainelLayout({ children }: LayoutProps<"/painel">)
           </div>
         ) : null}
 
-        <main className="mx-auto max-w-5xl px-4 pb-28 pt-5 md:px-8 md:pb-12 md:pt-8">{children}</main>
+        <main className="animate-pagina mx-auto max-w-5xl px-4 pb-32 pt-5 md:px-8 md:pb-12 md:pt-9">{children}</main>
       </div>
       <BarraInferior />
     </div>

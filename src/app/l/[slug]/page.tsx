@@ -29,7 +29,7 @@ export default async function Vitrine({ params }: PageProps<"/l/[slug]">) {
   return (
     <>
       <section className="mb-8">
-        <h1 className="font-display text-3xl font-semibold tracking-tight">{e.nome}</h1>
+        <h1 className="font-display text-2xl tracking-tight">{e.nome}</h1>
         {e.descricao && <p className="mt-2 text-tinta-2">{e.descricao}</p>}
         <ul className="mt-4 space-y-1.5 text-sm text-tinta-2">
           <li className="flex items-center gap-2">
@@ -96,7 +96,7 @@ export default async function Vitrine({ params }: PageProps<"/l/[slug]">) {
                 </p>
                 {p.descricao && <p className="mt-2 text-sm text-tinta-2">{p.descricao}</p>}
                 <p className="mt-3 flex-1">
-                  <span className="font-display text-2xl font-semibold tabular">{moeda(p.preco_centavos)}</span>
+                  <span className="font-display text-xl tabular">{moeda(p.preco_centavos)}</span>
                   <span className="text-sm text-tinta-3"> /mês</span>
                 </p>
                 <BotaoLink href={`/l/${slug}/conta?assinar=${p.id}`} variante="secundario" className="mt-3">

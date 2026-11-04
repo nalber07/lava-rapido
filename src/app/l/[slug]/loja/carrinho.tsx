@@ -103,7 +103,7 @@ export function Carrinho({
             <div className="flex items-center gap-3">
               <div className="flex-1">
                 <p className="text-sm text-tinta-3">{itens.reduce((t, p) => t + qtd[p.id], 0)} item(ns)</p>
-                <p className="font-display text-xl font-semibold tabular">{moeda(total)}</p>
+                <p className="font-display text-lg tabular">{moeda(total)}</p>
               </div>
               {estado === "ok" ? (
                 <Botao tamanho="lg" onClick={finalizar} disabled={enviando}>

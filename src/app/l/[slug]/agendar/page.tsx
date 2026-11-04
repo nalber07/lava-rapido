@@ -14,7 +14,7 @@ export default async function Agendar({ params, searchParams }: PageProps<"/l/[s
   const e = await getEmpresaPorSlug(slug);
   const { user, cliente } = await getClienteAtual(e.id);
 
-  const titulo = <h1 className="mb-5 font-display text-2xl font-semibold tracking-tight">Agendar lavagem</h1>;
+  const titulo = <h1 className="mb-5 font-display text-xl tracking-tight">Agendar lavagem</h1>;
   if (!user) {
     return (
       <>

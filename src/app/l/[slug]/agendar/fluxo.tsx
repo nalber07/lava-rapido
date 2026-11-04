@@ -214,7 +214,7 @@ export function FluxoAgendamento({ empresa, cliente, servicos, veiculos, planos,
               disabled={!servicoId}
               className={cx(
                 "flex w-16 shrink-0 snap-start flex-col items-center rounded-xl border py-2.5 disabled:opacity-40",
-                dia === d ? "border-agua-600 bg-agua-600 text-white" : "border-borda bg-superficie",
+                dia === d ? "border-acao bg-acao text-sobre-acao font-semibold" : "border-borda bg-superficie",
               )}
             >
               <span className={cx("text-xs capitalize", dia === d ? "text-agua-100" : "text-tinta-3")}>
@@ -246,7 +246,7 @@ export function FluxoAgendamento({ empresa, cliente, servicos, veiculos, planos,
                 aria-pressed={inicio === s}
                 className={cx(
                   "rounded-xl border py-2.5 text-[15px] font-medium tabular",
-                  inicio === s ? "border-agua-600 bg-agua-600 text-white" : "border-borda bg-superficie hover:border-borda-forte",
+                  inicio === s ? "border-acao bg-acao text-sobre-acao font-semibold" : "border-borda bg-superficie hover:border-borda-forte",
                 )}
               >
                 {hora(s)}

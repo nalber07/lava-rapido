@@ -6,27 +6,32 @@ import { Formulario } from "@/components/formulario";
 import { BotaoEnviar } from "@/components/botao-enviar";
 import { Campo, Cartao, Entrada } from "@/components/ui";
 import { cadastrarDono } from "../entrar/actions";
+import { AlternarTema } from "@/components/tema";
 
 export const metadata: Metadata = { title: "Cadastre seu lava rápido" };
 
 export default function Cadastro() {
   return (
-    <main className="mx-auto grid min-h-dvh max-w-5xl gap-10 px-5 py-8 md:grid-cols-2 md:py-14">
-      <div>
+    <main className="relative isolate mx-auto grid min-h-dvh max-w-5xl content-start gap-10 px-5 py-6 md:grid-cols-2 md:items-start md:py-10">
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgb(252_163_17/0.16),transparent_70%)]" aria-hidden />
+      <div className="flex items-center justify-between md:col-span-2">
         <Marca />
-        <h1 className="mt-10 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+        <AlternarTema />
+      </div>
+      <div className="animate-entra md:pt-8">
+        <h1 className="text-4xl font-light leading-[1.05] tracking-[-0.035em] md:text-5xl">
           Coloque seu lava rápido no celular dos clientes
         </h1>
-        <ul className="mt-6 space-y-3 text-tinta-2">
+        <ul className="mt-8 space-y-3.5 text-tinta-2">
           {["14 dias grátis, sem cartão", "Página de agendamento pronta na hora", "Serviços de exemplo já cadastrados"].map((t) => (
-            <li key={t} className="flex gap-2.5">
-              <Check className="mt-0.5 size-5 shrink-0 text-espuma" aria-hidden /> {t}
+            <li key={t} className="flex items-center gap-3">
+              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-acao text-sobre-acao"><Check className="size-3.5" strokeWidth={3} aria-hidden /></span> {t}
             </li>
           ))}
         </ul>
       </div>
 
-      <Cartao className="p-5 md:p-6">
+      <Cartao className="animate-entra p-5 md:p-7" style={{ animationDelay: "150ms" }}>
         <Formulario acao={cadastrarDono} className="space-y-4">
           <Campo rotulo="Nome do lava rápido">
             <Entrada name="empresa" required placeholder="Ex.: Brilho Car" />

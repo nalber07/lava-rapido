@@ -49,7 +49,7 @@ export default async function DetalheAgendamento({ params }: PageProps<"/painel/
           <p className="text-sm text-tinta-3">
             {dataLonga(a.inicio)} · {hora(a.inicio)} às {hora(a.fim)}
           </p>
-          <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight">{a.servico_nome}</h1>
+          <h1 className="mt-1 font-display text-xl tracking-tight">{a.servico_nome}</h1>
         </div>
         <Selo tom={s.tom} className="text-sm">
           {s.rotulo}
@@ -105,7 +105,7 @@ export default async function DetalheAgendamento({ params }: PageProps<"/painel/
         <div className="space-y-4">
           <Cartao className="p-4">
             <p className="text-sm text-tinta-3">Valor</p>
-            <p className="font-display text-3xl font-semibold tabular">{moeda(a.valor_centavos)}</p>
+            <p className="font-display text-2xl tabular">{moeda(a.valor_centavos)}</p>
             <div className="mt-2 flex items-center gap-2 text-sm">
               <Selo tom={pago ? "verde" : "ambar"}>{pago ? "Pago" : "A receber"}</Selo>
               <span className="text-tinta-3">{FORMA_PAGAMENTO[a.forma_pagamento as FormaPagamento]}</span>

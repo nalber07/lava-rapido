@@ -24,19 +24,19 @@ export default async function Admin() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">
       <Marca />
-      <h1 className="mt-8 font-display text-2xl font-semibold">Administração da plataforma</h1>
+      <h1 className="mt-8 font-display text-xl">Administração da plataforma</h1>
       <div className="my-6 grid grid-cols-3 gap-3">
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Lava rápidos</p>
-          <p className="font-display text-2xl font-semibold">{lista.length}</p>
+          <p className="font-display text-xl">{lista.length}</p>
         </Cartao>
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Assinantes</p>
-          <p className="font-display text-2xl font-semibold">{ativas.length}</p>
+          <p className="font-display text-xl">{ativas.length}</p>
         </Cartao>
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Receita mensal</p>
-          <p className="font-display text-2xl font-semibold tabular">{moeda(mrr)}</p>
+          <p className="font-display text-xl tabular">{moeda(mrr)}</p>
         </Cartao>
       </div>
       <Cartao className="divide-y divide-borda overflow-hidden">

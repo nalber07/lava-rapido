@@ -62,7 +62,7 @@ export default async function Fidelidade() {
                       <span className="flex-1 truncate">{c.nome}</span>
                       <span className="flex gap-0.5" aria-label={`${c.selos} de ${empresa.fidelidade_meta} selos`}>
                         {Array.from({ length: empresa.fidelidade_meta }, (_, i) => (
-                          <span key={i} className={cx("size-2 rounded-full", i < c.selos ? "bg-agua-600" : "bg-borda")} />
+                          <span key={i} className={cx("size-2 rounded-full", i < c.selos ? "bg-acao" : "bg-borda")} />
                         ))}
                       </span>
                     </li>

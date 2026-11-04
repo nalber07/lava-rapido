@@ -31,7 +31,7 @@ export default async function Assinatura({ searchParams }: PageProps<"/painel/as
       <Cartao className="mb-8 flex flex-wrap items-center justify-between gap-3 p-4">
         <div>
           <p className="text-sm text-tinta-3">Plano atual</p>
-          <p className="font-display text-xl font-semibold">{atual.nome}</p>
+          <p className="font-display text-lg">{atual.nome}</p>
         </div>
         <Selo tom={situacao.tom} className="text-sm">
           {situacao.texto}
@@ -51,7 +51,7 @@ export default async function Assinatura({ searchParams }: PageProps<"/painel/as
             <Cartao key={p.id} className={cx("flex flex-col p-5", p.id === atual.id && "ring-2 ring-agua-600")}>
               <h3 className="font-semibold">{p.nome}</h3>
               <p className="mt-2">
-                <span className="font-display text-3xl font-semibold tabular">{moeda(p.preco_centavos)}</span>
+                <span className="font-display text-2xl tabular">{moeda(p.preco_centavos)}</span>
                 <span className="text-tinta-3"> /mês</span>
               </p>
               <p className="text-sm text-tinta-3">{p.usuarios}</p>

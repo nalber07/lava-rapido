@@ -23,7 +23,7 @@ export function NavCliente({ slug, variante }: { slug: string; variante: "topo" 
           <Link
             key={i.href}
             href={i.href}
-            className={cx("rounded-lg px-3 py-2 text-sm font-medium", on(i.href) ? "bg-agua-50 text-agua-700" : "text-tinta-2 hover:bg-fundo")}
+            className={cx("rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300", on(i.href) ? "bg-acao text-sobre-acao" : "text-tinta-2 hover:bg-superficie-2 hover:text-tinta")}
           >
             {i.rotulo}
           </Link>
@@ -33,8 +33,8 @@ export function NavCliente({ slug, variante }: { slug: string; variante: "topo" 
   }
 
   return (
-    <nav className="pb-seguro fixed inset-x-0 bottom-0 z-30 border-t border-borda bg-superficie/95 backdrop-blur md:hidden">
-      <ul className="grid grid-cols-4">
+    <nav className="pb-seguro fixed inset-x-0 bottom-0 z-30 px-3 md:hidden" aria-label="Navegação">
+      <ul className="chanfro metal mx-auto grid max-w-md grid-cols-4 rounded-[1.5rem] border border-borda bg-superficie/90 p-1.5 shadow-flutuante backdrop-blur-xl">
         {itens.map((i) => {
           const ativo = on(i.href, i.exato);
           return (
@@ -42,9 +42,9 @@ export function NavCliente({ slug, variante }: { slug: string; variante: "topo" 
               <Link
                 href={i.href}
                 aria-current={ativo ? "page" : undefined}
-                className={cx("flex flex-col items-center gap-1 pt-2.5 text-[11px] font-medium", ativo ? "text-agua-600" : "text-tinta-3")}
+                className={cx("flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-[1.1rem] text-[11px] font-semibold transition-all duration-300", ativo ? "bg-acao text-sobre-acao" : "text-tinta-3 active:scale-95")}
               >
-                <i.icone className="size-[22px]" strokeWidth={ativo ? 2.25 : 1.75} aria-hidden />
+                <i.icone className="size-5" strokeWidth={ativo ? 2.25 : 1.75} aria-hidden />
                 {i.rotulo}
               </Link>
             </li>

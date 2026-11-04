@@ -6,6 +6,7 @@ import { BotaoEnviar } from "@/components/botao-enviar";
 import { Campo, Cartao, Entrada, cx } from "@/components/ui";
 import { criarConta, entrar } from "./actions";
 import { destinoSeguro } from "@/lib/site";
+import { AlternarTema } from "@/components/tema";
 
 export const metadata: Metadata = { title: "Entrar" };
 
@@ -17,10 +18,14 @@ export default async function Entrar({ searchParams }: PageProps<"/entrar">) {
   const ehCliente = next.startsWith("/l/");
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col px-5 py-8">
-      <Marca />
-      <div className="mt-10">
-        <h1 className="font-display text-3xl font-semibold tracking-tight">
+    <main className="relative isolate mx-auto flex min-h-dvh max-w-md flex-col px-5 py-6">
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_0%,rgb(252_163_17/0.16),transparent_70%)]" aria-hidden />
+      <div className="flex items-center justify-between">
+        <Marca />
+        <AlternarTema />
+      </div>
+      <div className="animate-entra mt-12">
+        <h1 className="text-4xl font-light tracking-[-0.03em]">
           {modo === "entrar" ? "Bem-vindo de volta" : "Crie sua conta"}
         </h1>
         <p className="mt-1 text-tinta-3">
@@ -28,20 +33,20 @@ export default async function Entrar({ searchParams }: PageProps<"/entrar">) {
         </p>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 rounded-xl bg-borda/60 p-1 text-sm font-medium">
+      <div className="animate-entra mt-7 grid grid-cols-2 rounded-full border border-borda bg-superficie p-1 text-sm font-semibold" style={{ animationDelay: "120ms" }}>
         {(["entrar", "criar"] as const).map((m) => (
           <Link
             key={m}
             href={qs(m)}
             replace
-            className={cx("rounded-lg py-2 text-center", modo === m ? "bg-superficie shadow-cartao" : "text-tinta-2")}
+            className={cx("rounded-full py-2.5 text-center transition-colors duration-300", modo === m ? "bg-acao text-sobre-acao" : "text-tinta-2 hover:text-tinta")}
           >
             {m === "entrar" ? "Entrar" : "Criar conta"}
           </Link>
         ))}
       </div>
 
-      <Cartao className="mt-4 p-5">
+      <Cartao className="animate-entra mt-4 p-5 md:p-6" style={{ animationDelay: "220ms" }}>
         {modo === "entrar" ? (
           <Formulario acao={entrar} className="space-y-4">
             <input type="hidden" name="next" value={next} />

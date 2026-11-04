@@ -51,7 +51,7 @@ export default async function Agenda({ searchParams }: PageProps<"/painel/agenda
               href={`?dia=${d}`}
               className={cx(
                 "flex flex-col items-center rounded-xl py-2 text-xs",
-                d === dia ? "bg-agua-600 text-white" : "text-tinta-2 hover:bg-superficie",
+                d === dia ? "bg-acao text-sobre-acao font-semibold" : "text-tinta-2 hover:bg-superficie",
               )}
               aria-current={d === dia ? "date" : undefined}
             >
