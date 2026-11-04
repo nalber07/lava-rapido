@@ -815,3 +815,7 @@ create policy "equipe envia fotos" on storage.objects for insert to authenticate
   with check (bucket_id = 'fotos' and public.is_membro(((storage.foldername(name))[1])::uuid));
 create policy "equipe apaga fotos" on storage.objects for delete to authenticated
   using (bucket_id = 'fotos' and public.is_membro(((storage.foldername(name))[1])::uuid));
+
+-- Acesso pela API (as regras de RLS acima limitam o que cada um vê)
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on all tables in schema public to anon, authenticated;
