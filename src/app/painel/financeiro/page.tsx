@@ -68,7 +68,7 @@ export default async function Financeiro({ searchParams }: PageProps<"/painel/fi
       <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-3">
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Entradas</p>
-          <p className="mt-1 font-display text-2xl font-semibold tabular text-[#0b7a5a]">{moeda(entradas)}</p>
+          <p className="mt-1 font-display text-2xl font-semibold tabular text-espuma-700">{moeda(entradas)}</p>
         </Cartao>
         <Cartao className="p-4">
           <p className="text-sm text-tinta-3">Saídas</p>
@@ -103,7 +103,7 @@ export default async function Financeiro({ searchParams }: PageProps<"/painel/fi
                       <p className="truncate text-sm font-medium">{l.descricao}</p>
                       <p className="text-xs text-tinta-3">{CATEGORIAS[l.categoria] ?? l.categoria}</p>
                     </div>
-                    <span className={cx("text-sm font-semibold tabular", l.tipo === "entrada" ? "text-[#0b7a5a]" : "text-perigo")}>
+                    <span className={cx("text-sm font-semibold tabular", l.tipo === "entrada" ? "text-espuma-700" : "text-perigo")}>
                       {l.tipo === "entrada" ? "+" : "−"}
                       {moeda(l.valor_centavos)}
                     </span>
@@ -126,7 +126,7 @@ export default async function Financeiro({ searchParams }: PageProps<"/painel/fi
                 <label className="cursor-pointer rounded-lg py-2 text-center has-[:checked]:bg-superficie has-[:checked]:text-perigo has-[:checked]:shadow-cartao">
                   <input type="radio" name="tipo" value="saida" defaultChecked className="sr-only" /> Despesa
                 </label>
-                <label className="cursor-pointer rounded-lg py-2 text-center has-[:checked]:bg-superficie has-[:checked]:text-[#0b7a5a] has-[:checked]:shadow-cartao">
+                <label className="cursor-pointer rounded-lg py-2 text-center has-[:checked]:bg-superficie has-[:checked]:text-espuma-700 has-[:checked]:shadow-cartao">
                   <input type="radio" name="tipo" value="entrada" className="sr-only" /> Receita
                 </label>
               </div>

@@ -6,16 +6,18 @@ export function cx(...c: (string | false | null | undefined)[]) {
   return c.filter(Boolean).join(" ");
 }
 
-type Variante = "primario" | "secundario" | "fantasma" | "perigo";
+type Variante = "primario" | "secundario" | "fantasma" | "perigo" | "sinal" | "tinta";
 
 const base =
   "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none select-none";
-const tamanhos = { md: "h-11 px-4 text-[15px]", sm: "h-9 px-3 text-sm", lg: "h-12 px-5 text-base" };
+const tamanhos = { md: "h-11 px-4 text-[15px]", sm: "h-10 px-3.5 text-sm", lg: "h-12 px-6 text-base" };
 const variantes: Record<Variante, string> = {
   primario: "bg-agua-600 text-white hover:bg-agua-700 active:bg-agua-900",
   secundario: "bg-superficie text-tinta border border-borda-forte hover:bg-fundo",
   fantasma: "text-agua-700 hover:bg-agua-50",
   perigo: "bg-perigo-50 text-perigo hover:bg-perigo hover:text-white",
+  sinal: "bg-sinal text-tinta hover:bg-sinal-claro active:bg-sinal",
+  tinta: "bg-tinta text-white hover:bg-agua-700 active:bg-agua-900",
 };
 
 export function classeBotao(v: Variante = "primario", t: keyof typeof tamanhos = "md") {
@@ -90,8 +92,8 @@ export function AreaTexto({ className, ...p }: ComponentProps<"textarea">) {
 
 const tons: Record<Tom, string> = {
   azul: "bg-agua-50 text-agua-700",
-  verde: "bg-espuma-50 text-[#0b7a5a]",
-  ambar: "bg-ambar-50 text-[#8a5800]",
+  verde: "bg-espuma-50 text-espuma-700",
+  ambar: "bg-ambar-50 text-ambar-700",
   vermelho: "bg-perigo-50 text-perigo",
   neutro: "bg-fundo text-tinta-2",
 };
@@ -116,7 +118,7 @@ export function Cabecalho({
   return (
     <div className="mb-5 flex items-end justify-between gap-4">
       <div className="min-w-0">
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-tinta md:text-[28px]">{titulo}</h1>
+        <h1 className="font-display text-[28px] font-bold leading-tight text-tinta md:text-[34px]">{titulo}</h1>
         {descricao && <p className="mt-1 text-sm text-tinta-3">{descricao}</p>}
       </div>
       {acao && <div className="shrink-0">{acao}</div>}
@@ -142,10 +144,19 @@ export function Secao({ titulo, children, acao }: { titulo: string; children: Re
   return (
     <section className="mb-8">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-base font-semibold text-tinta">{titulo}</h2>
+        <h2 className="font-display text-xl font-bold text-tinta">{titulo}</h2>
         {acao}
       </div>
       {children}
     </section>
+  );
+}
+
+/** Placa no padrão Mercosul (faixa azul em cima). */
+export function Placa({ placa, className }: { placa: string; className?: string }) {
+  return (
+    <span className={cx("placa text-[13px]", className)} title={`Placa ${placa}`}>
+      <span>{placa}</span>
+    </span>
   );
 }

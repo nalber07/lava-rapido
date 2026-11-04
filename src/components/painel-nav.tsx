@@ -22,9 +22,12 @@ export function NavLateral({ dono, slug }: { dono: boolean; slug: string }) {
           <Link
             key={i.href}
             href={i.href}
+            aria-current={ativo(path, i.href, i.exato) ? "page" : undefined}
             className={cx(
-              "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-medium",
-              ativo(path, i.href, i.exato) ? "bg-agua-50 text-agua-700" : "text-tinta-2 hover:bg-fundo",
+              "relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-medium transition-colors",
+              ativo(path, i.href, i.exato)
+                ? "bg-white/12 font-semibold text-white"
+                : "text-agua-200 hover:bg-white/5 hover:text-white",
             )}
           >
             <i.icone className="size-[18px]" aria-hidden />
@@ -34,7 +37,7 @@ export function NavLateral({ dono, slug }: { dono: boolean; slug: string }) {
       <a
         href={`/l/${slug}`}
         target="_blank"
-        className="mt-4 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-medium text-tinta-2 hover:bg-fundo"
+        className="mt-4 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-medium text-sinal hover:bg-white/5"
       >
         <ExternalLink className="size-[18px]" aria-hidden />
         Minha página

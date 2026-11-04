@@ -71,7 +71,7 @@ export default async function Pedidos({ searchParams }: PageProps<"/painel/pedid
                 <div className="flex items-center justify-between border-t border-borda pt-3">
                   <div className="text-sm">
                     <span className="font-semibold tabular">{moeda(p.total_centavos)}</span>{" "}
-                    <span className={pago ? "text-[#0b7a5a]" : "text-[#8a5800]"}>
+                    <span className={pago ? "text-espuma-700" : "text-ambar-700"}>
                       · {pago ? "Pago" : `A receber (${FORMA_PAGAMENTO[p.forma_pagamento]})`}
                     </span>
                   </div>

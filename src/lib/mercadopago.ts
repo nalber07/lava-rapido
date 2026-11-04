@@ -85,7 +85,7 @@ export async function criarAssinaturaPlataforma(opts: {
   const r = await mp<{ init_point: string }>(token, "/preapproval", {
     method: "POST",
     body: JSON.stringify({
-      reason: `Lava Rápido · Plano ${opts.nomePlano}`,
+      reason: `Pista · Plano ${opts.nomePlano}`,
       external_reference: `emp:${opts.empresaId}:${opts.planoId}`,
       payer_email: opts.email,
       back_url: opts.voltarPara,

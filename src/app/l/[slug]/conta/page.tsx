@@ -159,11 +159,11 @@ export default async function Conta({ params, searchParams }: PageProps<"/l/[slu
                       </li>
                     ))}
                   </ol>
-                  {status === "pronto" && <p className="mt-3 rounded-lg bg-espuma-50 px-3 py-2 text-sm text-[#0b7a5a]">Seu carro está pronto para retirada!</p>}
+                  {status === "pronto" && <p className="mt-3 rounded-lg bg-espuma-50 px-3 py-2 text-sm text-espuma-700">Seu carro está pronto para retirada!</p>}
                   <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-borda pt-3 text-sm">
                     <span className="flex-1">
                       <span className="font-semibold tabular">{moeda(a.valor_centavos)}</span>{" "}
-                      <span className={a.status_pagamento === "pago" ? "text-[#0b7a5a]" : "text-tinta-3"}>
+                      <span className={a.status_pagamento === "pago" ? "text-espuma-700" : "text-tinta-3"}>
                         · {a.status_pagamento === "pago" ? "Pago" : FORMA_PAGAMENTO[a.forma_pagamento as FormaPagamento]}
                       </span>
                     </span>

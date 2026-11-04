@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { Selo } from "@/components/ui";
+import { Placa, Selo } from "@/components/ui";
 import { hora, placaFormatada } from "@/lib/format";
 import { STATUS_AGENDAMENTO, type StatusAgendamento } from "@/lib/types";
 
@@ -27,9 +27,12 @@ export function ItemAgendamento({ a }: { a: AgendamentoLista }) {
       <div className="w-12 shrink-0 text-[15px] font-semibold tabular text-tinta">{hora(a.inicio)}</div>
       <div className="min-w-0 flex-1">
         <p className="truncate font-medium text-tinta">{a.clientes?.nome ?? "Cliente"}</p>
-        <p className="truncate text-sm text-tinta-3">
-          {a.servico_nome}
-          {a.veiculos && ` · ${[a.veiculos.modelo, placaFormatada(a.veiculos.placa)].filter(Boolean).join(" ")}`}
+        <p className="mt-0.5 flex min-w-0 items-center gap-2 text-sm text-tinta-3">
+          {a.veiculos && <Placa placa={placaFormatada(a.veiculos.placa)} className="shrink-0" />}
+          <span className="truncate">
+            {a.servico_nome}
+            {a.veiculos?.modelo && `, ${a.veiculos.modelo}`}
+          </span>
         </p>
       </div>
       <Selo tom={s.tom}>{s.rotulo}</Selo>

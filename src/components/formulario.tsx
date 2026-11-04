@@ -28,7 +28,7 @@ export function Formulario({
       {estado?.mensagem && (
         <p
           role="status"
-          className={cx("mt-3 rounded-lg px-3 py-2 text-sm", estado.ok ? "bg-espuma-50 text-[#0b7a5a]" : "bg-perigo-50 text-perigo")}
+          className={cx("mt-3 rounded-lg px-3 py-2 text-sm", estado.ok ? "bg-espuma-50 text-espuma-700" : "bg-perigo-50 text-perigo")}
         >
           {estado.mensagem}
         </p>

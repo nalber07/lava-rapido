@@ -19,13 +19,13 @@ export default async function PainelLayout({ children }: LayoutProps<"/painel">)
 
   return (
     <div className="md:grid md:min-h-dvh md:grid-cols-[248px_1fr]">
-      <aside className="sticky top-0 hidden h-dvh flex-col border-r border-borda bg-superficie px-3 py-5 md:flex">
+      <aside className="escuro sticky top-0 hidden h-dvh flex-col bg-agua-900 px-3 py-5 md:flex">
         <div className="px-3 pb-6">
-          <Marca href="/painel" nome={empresa.nome} />
+          <Marca href="/painel" nome={empresa.nome} claro />
         </div>
         <NavLateral dono={papel === "dono"} slug={empresa.slug} />
         <form action="/sair" method="post" className="mt-auto px-3">
-          <button className="text-sm text-tinta-3 hover:text-tinta">Sair</button>
+          <button className="text-sm text-agua-200 hover:text-white">Sair</button>
         </form>
       </aside>
 
@@ -44,7 +44,7 @@ export default async function PainelLayout({ children }: LayoutProps<"/painel">)
             )}
           </div>
         ) : empresa.status_assinatura === "teste" && dias <= 7 ? (
-          <div className="bg-ambar-50 px-4 py-2.5 text-center text-sm text-[#8a5800]">
+          <div className="bg-ambar-50 px-4 py-2.5 text-center text-sm text-ambar-700">
             {dias === 0 ? "Seu teste termina hoje." : `Faltam ${dias} dia${dias > 1 ? "s" : ""} de teste grátis.`}{" "}
             {papel === "dono" && (
               <Link href="/painel/assinatura" className="font-semibold underline">

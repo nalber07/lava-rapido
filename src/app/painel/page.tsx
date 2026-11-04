@@ -73,7 +73,7 @@ export default async function Inicio() {
             </Link>
           )}
           {(assinaturas.count ?? 0) > 0 && (
-            <Link href="/painel/fidelidade" className="flex-1 rounded-xl bg-ambar-50 px-4 py-3 text-sm font-medium text-[#8a5800]">
+            <Link href="/painel/fidelidade" className="flex-1 rounded-xl bg-ambar-50 px-4 py-3 text-sm font-medium text-ambar-700">
               {assinaturas.count === 1 ? "1 plano mensal aguardando pagamento" : `${assinaturas.count} planos mensais aguardando pagamento`} →
             </Link>
           )}

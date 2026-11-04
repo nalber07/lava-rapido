@@ -1,35 +1,85 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), var(--font-geist-sans), ui-sans-serif, sans-serif;
+  /* Barlow nasceu da sinalização de estrada; a versão condensada vira os títulos e as placas. */
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow-cond), var(--font-barlow), ui-sans-serif, sans-serif;
 
-  --color-tinta: #0d1b2a;
-  --color-tinta-2: #3d4b5c;
-  --color-tinta-3: #5a6778;
-  --color-fundo: #f3f6f9;
+  /* Tinta: o azul-marinho da faixa da placa Mercosul, escurecido para texto. */
+  --color-tinta: #101c3d;
+  --color-tinta-2: #38446a;
+  --color-tinta-3: #5a6587;
+  /* Fundo: concreto molhado, frio e claro. */
+  --color-fundo: #eff3f8;
   --color-superficie: #ffffff;
-  --color-borda: #dfe5ec;
-  --color-borda-forte: #c5cfda;
+  --color-borda: #dce3ee;
+  --color-borda-forte: #bfcadb;
 
-  --color-agua-50: #eaf4fe;
-  --color-agua-100: #d3e8fd;
-  --color-agua-200: #a7d0fa;
-  --color-agua-500: #1677e5;
-  --color-agua-600: #0b62c4;
-  --color-agua-700: #094e9c;
-  --color-agua-900: #0a2a52;
+  /* Azul placa: cor de ação do app. */
+  --color-agua-50: #edf2fe;
+  --color-agua-100: #d9e3fc;
+  --color-agua-200: #b1c5f7;
+  --color-agua-500: #2f5fe6;
+  --color-agua-600: #1d48c9;
+  --color-agua-700: #183aa1;
+  --color-agua-900: #0f1f52;
 
-  --color-espuma: #12b886;
-  --color-espuma-50: #e6f8f1;
+  /* Amarelo sinal: a placa pintada à mão de "LAVA JATO". Só para o que precisa ser visto de longe. */
+  --color-sinal: #ffcb2e;
+  --color-sinal-claro: #ffe27a;
+  --color-sinal-50: #fff7d9;
+  --color-sinal-700: #7a5900;
+
+  --color-espuma: #12a172;
+  --color-espuma-50: #e3f6ee;
+  --color-espuma-700: #0b6e4f;
   --color-ambar: #d98a00;
   --color-ambar-50: #fdf3e1;
-  --color-perigo: #d93f3f;
+  --color-ambar-700: #855400;
+  --color-perigo: #d13b3b;
   --color-perigo-50: #fdecec;
 
   --radius-cartao: 1rem;
-  --shadow-cartao: 0 1px 2px rgb(13 27 42 / 0.04), 0 1px 3px rgb(13 27 42 / 0.06);
-  --shadow-flutuante: 0 8px 24px rgb(13 27 42 / 0.12);
+  --shadow-cartao: 0 1px 2px rgb(16 28 61 / 0.05), 0 1px 3px rgb(16 28 61 / 0.07);
+  --shadow-flutuante: 0 12px 32px -8px rgb(16 28 61 / 0.25);
+
+  --animate-pista: pista 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes pista {
+    from {
+      opacity: 0;
+      transform: translateX(-48px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Placa no padrão Mercosul: faixa azul em cima, caracteres condensados. */
+.placa {
+  display: inline-flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1.5px solid var(--color-tinta);
+  border-radius: 0.375rem;
+  background: #fff;
+  color: var(--color-tinta);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+.placa::before {
+  content: "";
+  display: block;
+  height: 0.3em;
+  background: var(--color-agua-600);
+}
+.placa > span {
+  padding: 0.2em 0.45em 0.18em;
 }
 
 :root {
@@ -64,6 +114,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 :focus-visible {
   outline: 2px solid var(--color-agua-500);
   outline-offset: 2px;
+}
+
+/* Em superfícies azul-marinho o foco azul some: usa o amarelo sinal. */
+.escuro :focus-visible {
+  outline-color: var(--color-sinal);
 }
 
 @media (prefers-reduced-motion: reduce) {
